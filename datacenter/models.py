@@ -1,3 +1,6 @@
+from datetime import timedelta
+
+import django.utils.timezone
 from django.db import models
 
 
@@ -28,3 +31,19 @@ class Visit(models.Model):
                 if self.leaved_at else 'not leaved'
             )
         )
+
+    def get_time_entered_localtime(self):
+        return django.utils.timezone.localtime(self.entered_at)
+
+    def get_duration(self):
+        if not self.leaved_at:  
+            current_time = django.utils.timezone.localtime()
+            time_delta = current_time - django.utils.timezone.localtime(
+                self.entered_at
+            )
+            return time_delta
+        time_delta_finished_visit = self.leaved_at - self.entered_at
+        return time_delta_finished_visit
+
+    def is_visit_long(self, minutes):
+        return (timedelta.total_seconds(self.get_duration()) // 60) >= minutes
