@@ -1,7 +1,7 @@
 from datetime import timedelta
 
-import django.utils.timezone
 from django.db import models
+from django.utils import timezone
 
 
 class Passcard(models.Model):
@@ -33,12 +33,12 @@ class Visit(models.Model):
         )
 
     def get_time_entered_localtime(self):
-        return django.utils.timezone.localtime(self.entered_at)
+        return timezone.localtime(self.entered_at)
 
     def get_duration(self):
-        time_delta = django.utils.timezone.localtime(
+        time_delta = timezone.localtime(
             self.leaved_at
-        ) - django.utils.timezone.localtime(
+        ) - timezone.localtime(
             self.entered_at
         )
         return time_delta
