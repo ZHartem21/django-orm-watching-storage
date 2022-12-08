@@ -13,14 +13,10 @@ pip install -r requirements.txt
 ### How to use
 
 Before using the tool, you must create a new file called **db_settings.env** in the project folder and fill it with required database settings:
-1. `ENGINE`
-2. `HOST`
-3. `PORT`
-4. `NAME`
-5. `USER`
-6. `PASSWORD`
-7. `SECRET_KEY`
-8. `DEBUG` - True or False
+1. `SECRET_KEY`
+2. `DEBUG` - True or False
+3. `ALLOWED_HOSTS` - localhost
+4. `DATABASE_URL` in format `ENGINE`://`USER`:`PASSWORD`@`HOST`:`PORT`/`NAME`
 
 After creating database settings environment file, you will be able to launch the manage.py file. 
 ```
