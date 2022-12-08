@@ -1,19 +1,13 @@
 import os
 
+import dj_database_url
 from dotenv import load_dotenv
 
 load_dotenv('db_settings.env')
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': os.environ['ENGINE'],
-        'HOST': os.environ['HOST'],
-        'PORT': os.environ['PORT'],
-        'NAME': os.environ['NAME'],
-        'USER': os.environ['USER'],
-        'PASSWORD': os.environ['PASSWORD'],
-    }
+        'default': dj_database_url.config(default=os.environ['DATABASE_URL'])
 }
 
 INSTALLED_APPS = ['datacenter']
@@ -24,7 +18,7 @@ DEBUG = os.environ['DEBUG']
 
 ROOT_URLCONF = 'project.urls'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS']
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
